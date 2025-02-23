@@ -1,10 +1,11 @@
 
 #saves appointments to a .txt file from a list for example: appointment = ["Andres Käär", "2025-02-25", "14:00", "Haircut"]
-#appointment = ["Andres Käär", "2025-02-25", "14:00","Haircut"]
+#appointment = [["Andres Käär", "2025-02-25", "14:00","Haircut"], ["Andres Käär", "2025-02-25", "14:00","Haircut"]]
 
-def save_appointments(appointment, filename="appointments.txt"):
+def save_appointments(appointments, filename="appointments.txt"):
     with open(filename, "a") as file: #new appointments are added not overwritten
-        file.write(f"{appointment[0]},{appointment[1]},{appointment[2]},{appointment[3]}\n")
+        for appointment in appointments:
+            file.write(f"{appointment[0]},{appointment[1]},{appointment[2]},{appointment[3]}\n")
     print("Appointments saved!")
 
 #save_appointments(appointment, filename="test.txt")
