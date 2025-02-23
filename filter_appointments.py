@@ -4,14 +4,8 @@ import file_handling
 
 # name, date, time, and service type, hash (confirmation code)
 # this structure comes from main data source,
-# eg from appointments.txt file
+# from appointments.txt file
 
-data_newlines_plaintext = """
-James Smith,2025-02-25,0930,1,r7z47dy
-Katie Everdeen,2025-02-25,1000,2,73p9wsx
-Ella Purnell,2025-03-02,1130,1,jhnw4g7
-Mikey Madison,2025-03-02,1300,1,wwfht88
-"""
 
 def make_hash(len = 7):
     hOut = ''
@@ -59,6 +53,7 @@ def filter_by_hash(hash, d = file_handling.load_appointments()):
         if hash in v[4]: ## 4 field is hash, eg 73p9wsx
             list_out += ','.join(v) + '\n'
     return list_out
+
 
 def user_option4_interface():
     print("\nEnter the filtering option, with number:") 
