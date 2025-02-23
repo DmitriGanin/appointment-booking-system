@@ -30,3 +30,4 @@ def user_menu():
             return int(user_option.strip()[0])
         else:
             print('Your input is not valid, please try again.')
+
