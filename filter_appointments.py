@@ -1,22 +1,17 @@
 import random
 import datetime
+import file_handling
 
-# name, date, time, and service type, hash (confirmation code), creation time
+# name, date, time, and service type, hash (confirmation code)
 # this structure comes from main data source,
-# eg from database or appointments.txt file
+# eg from appointments.txt file
 
 data_newlines_plaintext = """
-James Smith,2025-02-25,0930,1,r7z47dy,2025-02-23_105123
-Katie Everdeen,2025-02-25,1000,2,73p9wsx,2025-02-23_105223
-Ella Purnell,2025-03-02,1130,1,jhnw4g7,2025-02-23_105323
-Mikey Madison,2025-03-02,1300,1,wwfht88,2025-02-23_105423
+James Smith,2025-02-25,0930,1,r7z47dy
+Katie Everdeen,2025-02-25,1000,2,73p9wsx
+Ella Purnell,2025-03-02,1130,1,jhnw4g7
+Mikey Madison,2025-03-02,1300,1,wwfht88
 """
-
-
-def dataset():
-    return data_newlines_plaintext.strip().splitlines()
-    ## splits full datamassive to the list by newlines
-
 
 def make_hash(len = 7):
     hOut = ''
@@ -41,37 +36,59 @@ def current_time_safe():
     ## current datetime format YYYY-MM-DD_HHMMSS
 
 
-def filter_by_name(name, d = dataset()):
+def filter_by_name(name, d = file_handling.load_appointments()):
+    #print('dataset', d)
     list_out = ''
     for k,v in enumerate(d):
-        el = v.split(',')
-        if name in el[0]: ## 0 field is name, eg James Smith
-            list_out += v + '\n'
+        if name in v[0]: ## 0 field is name, eg James Smith
+            list_out += ','.join(v) + '\n'
     return list_out
 
 
-def filter_by_date(date, d = dataset()):
+def filter_by_date(date, d = file_handling.load_appointments()):
     list_out = ''
     for k,v in enumerate(d):
-        el = v.split(',')
-        if date in el[1]: ## 1 field is date, eg 2025-02-25
-            list_out += v + '\n'
+        if date in v[1]: ## 1 field is date, eg 2025-02-25
+            list_out += ','.join(v) + '\n'
     return list_out
 
 
-def filter_by_hash(hash, d = dataset()):
+def filter_by_hash(hash, d = file_handling.load_appointments()):
     list_out = ''
-    for k,v in enumerate(d):
-        el = v.split(',')
-        if hash in el[4]: ## 4 field is hash, eg 73p9wsx
-            list_out += v + '\n'
+    for k,v in enumerate(d):        
+        if hash in v[4]: ## 4 field is hash, eg 73p9wsx
+            list_out += ','.join(v) + '\n'
     return list_out
+
+def user_option4_interface():
+    print("\nEnter the filtering option, with number:") 
+    filter_menu_option = "1 - Filter by name, 2 - Filter by date, 0 - Back to the main menu: "
+    try:
+        user_choice = int(input(filter_menu_option))
+        if user_choice == 1:
+            user_input_name = input('Please enter the name: ')
+            print('\n')
+            print(filter_by_name(user_input_name))
+
+        elif user_choice == 2:
+            user_input_date = input('Please enter the date on format YYYY-MM-DD: ')
+            print('\n')
+            print(filter_by_date(user_input_date))
+
+        elif user_choice == 0:
+            return
+        
+        user_option4_interface()        
+    except:
+        print("There was error in inserted number")
+        user_option4_interface()        
+    return
 
 
 if __name__ == "__main__":
     # print(make_hash())
     print(filter_by_name('James'))
     print(filter_by_date('2025-02-25'))
-    print(filter_by_hash('73p9wsx'))
+    # print(filter_by_hash('73p9wsx'))
     # print(date_today())
     # print(current_time_safe())

@@ -1,6 +1,8 @@
 # This is a main file for launching the appointment booking system
 # It will import functions created by student from other modules (.py files) and will use those in the main code
 import user_menu
+import filter_appointments
+
 
 menu_list = user_menu.menu_list # for convenience of others the menu list (and its index as an option digit) is available in main .py code
 
@@ -21,7 +23,7 @@ def launch_booking_system():
         elif user_option == 3:  # Cancel or reschedule an appointment
             pass # placeholder for the modular function
         elif user_option == 4:  # Filter appointments by date or client name
-            pass # placeholder for the modular function
+            filter_appointments.user_option4_interface()
         elif user_option == 5:  # Save and load appointment data
             pass # placeholder for the modular function
 

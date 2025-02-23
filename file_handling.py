@@ -1,4 +1,4 @@
-
+from pathlib import Path
 #saves appointments to a .txt file from a list for example: appointment = ["Andres Käär", "2025-02-25", "14:00", "Haircut"]
 #appointment = [["Andres Käär", "2025-02-25", "14:00", "teenus","räsi"], ["Andres Käär", "2025-02-25", "14:00","Haircut","räsi"]]
 
@@ -15,14 +15,17 @@ def save_appointments(appointments, filename="appointments.txt"):
 
 def load_appointments(filename="appointments.txt"):
     appointments = []
+    thisDir = Path(__file__).parent.absolute()
+    fullPath = Path(thisDir,filename)
+    #print(fullPath)
     try:
-        with open(filename, "r") as file:
+        with open(fullPath, "r") as file:
             for line in file:
                 name, date, time, service, rasi = line.strip().split(",")
                 appointments.append([name, date, time, service, rasi])
-        print("Appointments loaded!")
-    except FileNotFoundError:
-        print("No appointments found")
+        #print("Appointments loaded!")
+    except BaseException as e:
+        print("Error on file handling", str(e))
     return appointments
 
 #loaded_appointments = load_appointments(filename="test.txt")
