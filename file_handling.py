@@ -31,4 +31,3 @@ def load_appointments(filename="appointments.txt"):
 #loaded_appointments = load_appointments(filename="test.txt")
 #print(loaded_appointments)
 #print(loaded_appointments[1][2])
-
