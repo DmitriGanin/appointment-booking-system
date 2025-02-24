@@ -40,7 +40,7 @@ def filter_by_name(name, d = file_handling.load_appointments()):
     #print('dataset', d)
     list_out = ''
     for k,v in enumerate(d):
-        if name in v[0]: ## 0 field is name, eg James Smith
+        if name.lower() in v[0].lower(): ## 0 field is name, eg James Smith
             list_out += ','.join(v) + '\n'
     return list_out
 
@@ -56,7 +56,7 @@ def filter_by_date(date, d = file_handling.load_appointments()):
 def filter_by_hash(hash, d = file_handling.load_appointments()):
     list_out = ''
     for k,v in enumerate(d):        
-        if hash in v[4]: ## 4 field is hash, eg 73p9wsx
+        if hash.lower() in v[4].lower(): ## 4 field is hash, eg 73p9wsx
             list_out += ','.join(v) + '\n'
     return list_out
 
